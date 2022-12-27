@@ -1,0 +1,21 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: ealen/echo-server
+    steps:
+      - run: echo "construyendo..."
+  test:
+    docker:
+      - image: ealen/echo-server
+    steps:
+      - run: echo "testeando..."
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
