@@ -11,12 +11,12 @@ jobs:
       - run: git --version
       - run: docker --version
       - run: docker build . -t mytag
-      - run: mkdir my_workspace
+      - run: mkdir -p my_workspace
       - run: touch my_workspace/my_file
       - persist_to_workspace:
           root: my_workspace
           paths:
-            - "output"
+            - "my_file"
   test:
     docker:
       - image: cimg/base:2022.12
