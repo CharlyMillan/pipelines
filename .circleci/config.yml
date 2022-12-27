@@ -11,11 +11,12 @@ jobs:
       - run: git --version
       - run: docker --version
       - run: docker build . -t mytag
+      - run: touch my_file
   test:
     docker:
       - image: cimg/base:2022.12
     steps:
-      - run: echo "testeando..."
+      - run: ls -al
 
 workflows:
   build_and_test:
