@@ -3,13 +3,14 @@ jobs:
   build:
     docker:
       - image: cimg/base:2022.12
+    resource_class: small
     steps:
       - run: git --version
       - run: docker --version
       - run: echo "construyendo..."
   test:
     docker:
-      - image: ealen/echo-server
+      - image: cimg/base:2022.12
     steps:
       - run: echo "testeando..."
 
