@@ -23,7 +23,7 @@ jobs:
       - image: cimg/base:2022.12
     steps:
       - attach_workspace:
-          at: /my_workspace
+          at: my_workspace
       - run: ls -al
       - run: cat my_workspace/my_file
 
