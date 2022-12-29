@@ -13,10 +13,10 @@ jobs:
       - checkout
       - aws-cli/setup:
           profile-name: default
-      - aws-cli/role-arn-setup:
-          profile-name: new-profile
-          role-arn: 'arn:aws:iam::328282054938:role/k8sDeployerRole'
-          source-profile: default
+      - run: >-
+            aws sts assume-role --role-arn
+            "arn:aws:iam::328282054938:role/k8sDeployerRole" --role-session-name
+            AWSCLI-Session-1
       - run: docker login --username AWS 328282054938.dkr.ecr.us-west-1.amazonaws.com -p $(aws ecr get-login-password --region us-west-1)
       - run: docker build . -t mytag
       - run: mkdir -p my_workspace
