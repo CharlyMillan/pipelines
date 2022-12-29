@@ -9,11 +9,7 @@ jobs:
       - setup_remote_docker:
           version: 20.10.18
       - checkout
-      - run: >-
-            aws sts assume-role --role-arn
-            "arn:aws:iam::328282054938:role/k8sDeployerRole" --role-session-name
-            AWSCLI-Session-1
-      - run: export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s" $(aws sts assume-role --role-arn $AWS_DEPLOYER_ARN_ROLE --role-session-name $CIRCLE_PROJECT_REPONAME-session-$CIRCLE_BUILD_NUM --query "Credentials.[AccessKeyId,SecretAccessKey,SessionToken]" --output text))
+      - run: export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s" $(aws sts assume-role --role-arn arn:aws:iam::328282054938:role/k8sDeployerRole --role-session-name $CIRCLE_PROJECT_REPONAME-session-$CIRCLE_BUILD_NUM --query "Credentials.[AccessKeyId,SecretAccessKey,SessionToken]" --output text))
       - run: docker login --username AWS 328282054938.dkr.ecr.us-west-1.amazonaws.com -p $(aws ecr get-login-password --region us-west-1)
       - run: docker build . -t mytag
       - run: mkdir -p my_workspace
