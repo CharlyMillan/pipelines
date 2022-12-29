@@ -1,18 +1,14 @@
 version: 2.1
 
-orbs:
-  aws-cli: circleci/aws-cli@3.1.4
-
 jobs:
   build:
-    executor: aws-cli/default
+    docker:
+      - image: cimg/aws:2022.11
     resource_class: small
     steps:
       - setup_remote_docker:
           version: 20.10.18
       - checkout
-      - aws-cli/setup:
-          profile-name: default
       - run: >-
             aws sts assume-role --role-arn
             "arn:aws:iam::328282054938:role/k8sDeployerRole" --role-session-name
