@@ -1,4 +1,8 @@
 version: 2.1
+
+orbs:
+  aws-cli: circleci/aws-cli@3.1.4
+
 jobs:
   build:
     docker:
@@ -8,6 +12,8 @@ jobs:
       - setup_remote_docker:
           version: 20.10.18
       - checkout
+      - aws-cli/setup:
+          profile-name: default
       - run: git --version
       - run: docker --version
       - run: docker build . -t mytag
@@ -30,7 +36,8 @@ jobs:
 workflows:
   build_and_test:
     jobs:
-      - build
+      - build:
+          context: aws-credentials
       - test:
           requires:
             - build
