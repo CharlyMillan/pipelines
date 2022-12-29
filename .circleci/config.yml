@@ -12,6 +12,7 @@ jobs:
       - run: | 
           aws sts assume-role --role-arn arn:aws:iam::328282054938:role/k8sDeployerRole --role-session-name $CIRCLE_PROJECT_REPONAME-session-$CIRCLE_BUILD_NUM --no-cli-pager
           echo $RoleAccessKeyID
+          echo $AWS_ACCESS_KEY_ID
       - run: docker login --username AWS 328282054938.dkr.ecr.us-west-1.amazonaws.com -p $(aws ecr get-login-password --region us-west-1)
       - run: docker build . -t mytag
       - run: mkdir -p my_workspace
