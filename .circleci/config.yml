@@ -14,8 +14,7 @@ jobs:
       - checkout
       - aws-cli/setup:
           profile-name: default
-      - run: git --version
-      - run: docker --version
+      - run: docker login --username AWS 328282054938.dkr.ecr.us-west-1.amazonaws.com -p $(aws ecr get-login-password --region us-west-1)
       - run: docker build . -t mytag
       - run: mkdir -p my_workspace
       - run: touch my_workspace/my_file
