@@ -23,6 +23,7 @@ jobs:
   test:
     docker:
       - image: cimg/base:2022.12
+    resource_class: small
     steps:
       - attach_workspace:
           at: my_workspace
@@ -31,6 +32,7 @@ jobs:
   deploy:
     docker:
       - image: cimg/aws:2022.11
+    resource_class: small
     steps:
       - run: 
           name: Installing Helm
@@ -41,6 +43,7 @@ jobs:
             sudo apt-get update
             sudo apt-get install helm
             helm version
+            helm install release-$CIRCLE_BUILD_NUM sample-chart
 
 workflows:
   build_and_test:
