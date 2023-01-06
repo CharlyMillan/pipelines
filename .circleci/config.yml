@@ -34,6 +34,7 @@ jobs:
       - image: cimg/aws:2022.11
     resource_class: small
     steps:
+      - checkout
       - run: 
           name: Installing Helm
           command: |
