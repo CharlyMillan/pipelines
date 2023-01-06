@@ -28,6 +28,11 @@ jobs:
           at: my_workspace
       - run: ls -al
       - run: cat my_workspace/my_file
+  deploy:
+    docker:
+      - image: cimg/aws:2022.11
+    steps:
+      - run: helm version
 
 workflows:
   build_and_test:
@@ -37,3 +42,7 @@ workflows:
       - test:
           requires:
             - build
+      - deploy:
+          context: aws-credentials
+          requires:
+            - "test"
