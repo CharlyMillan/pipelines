@@ -44,6 +44,8 @@ jobs:
             sudo apt-get update
             sudo apt-get install helm
             helm version
+            export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s" $(aws sts assume-role --role-arn $AWS_DEPLOYER_ROLE_ARN --role-session-name $CIRCLE_PROJECT_REPONAME-session-$CIRCLE_BUILD_NUM --query "Credentials.[AccessKeyId,SecretAccessKey,SessionToken]" --output text))
+            aws eks update-kubeconfig --region us-west-1 --name staging-eks
             helm install release-$CIRCLE_BUILD_NUM sample-chart
 
 workflows:
