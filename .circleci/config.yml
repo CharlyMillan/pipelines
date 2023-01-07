@@ -56,7 +56,11 @@ workflows:
       - test:
           requires:
             - build
-      - deploy:
+      - deploy-blue:
           context: aws-credentials
           requires:
             - "test"
+      - hold: 
+          type: approval
+          requires:
+           - deploy-blue
