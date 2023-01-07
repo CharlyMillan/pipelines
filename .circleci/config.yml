@@ -46,7 +46,7 @@ jobs:
             helm version
             export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s" $(aws sts assume-role --role-arn $AWS_DEPLOYER_ROLE_ARN --role-session-name $CIRCLE_PROJECT_REPONAME-session-$CIRCLE_BUILD_NUM --query "Credentials.[AccessKeyId,SecretAccessKey,SessionToken]" --output text))
             aws eks update-kubeconfig --region us-west-1 --name staging-eks
-            helm upgrade -i release-$CIRCLE_BUILD_NUM sample-chart -n api-staging
+            helm upgrade -i release-57 sample-chart -n api-staging
   deploy-green:
     docker:
       - image: cimg/aws:2022.11
