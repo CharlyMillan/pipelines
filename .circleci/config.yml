@@ -29,7 +29,7 @@ jobs:
           at: my_workspace
       - run: ls -al
       - run: cat my_workspace/my_file
-  deploy:
+  deploy-blue:
     docker:
       - image: cimg/aws:2022.11
     resource_class: small
