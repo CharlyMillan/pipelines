@@ -20,7 +20,7 @@ jobs:
       - run: touch my_workspace/my_file
       - run: echo "testing echos" >> my_workspace/my_file
       - persist_to_workspace:
-          root: credentials
+          root: /
           paths:
             - "~/.aws/credentials"
   test:
