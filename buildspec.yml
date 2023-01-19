@@ -6,13 +6,15 @@ phases:
       nodejs: 16.x
     commands:
       - echo "Install Prequisites"
+      - echo $CROSS_ACCOUNT_ROLE
+      - echo $CF_EXECUTION_ROLE
       - npm install --location=global serverless@3.24.1
       - cd infrastructure
       - serverless plugin install -n serverless-deployment-bucket
   build:
     commands:
       - echo "package servicex"
-      - sls package --package sls-bucket-sample --stage develop
+      - sls package --package sls-bucket-sample --stage develop --param="cfnRoleArn=$CF_EXECUTION_ROLE"
       - ls sls-bucket-sample
       - echo "deploying...."
-      - sls deploy --package sls-bucket-sample --stage develop 
+      - sls deploy --package sls-bucket-sample --stage develop --param="cfnRoleArn=$CF_EXECUTION_ROLE"

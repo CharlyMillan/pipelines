@@ -7,8 +7,11 @@ provider:
   name: aws
   stage: ${opt:stage, 'baseline'}
   region: ${opt:region, 'us-east-1'}
+  cfnRole: ${param:cfnRoleArn}
   deploymentBucket:
     name: cross-account-sample-1-${self:provider.stage}
+  iam:
+    deploymentRole: ${self:provider.cfnRole}
 
 custom:
   deploymentBucket:
