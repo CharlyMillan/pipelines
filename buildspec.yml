@@ -7,9 +7,11 @@ phases:
     commands:
       - echo "Install Prequisites"
       - npm install --location=global serverless@3.24.1
+      - cd infrastructure
       - serverless plugin install -n serverless-deployment-bucket
   build:
     commands:
+      - pwd
       - echo "package servicex"
       - cd infrastructure
       - sls package --package sls-bucket-sample --stage develop
