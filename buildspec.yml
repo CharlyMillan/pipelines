@@ -9,13 +9,13 @@ phases:
       - echo $CROSS_ACCOUNT_ROLE
       - echo $CF_EXECUTION_ROLE
       - npm install --location=global serverless@3.24.1
+      - chmod +x aws-profile-setup.sh
       - cd infrastructure
       - serverless plugin install -n serverless-deployment-bucket
-      - chmod +x aws-profile-setup.sh
   build:
     commands:
       - echo "package servicex"
-      - . ./aws-profile-setup.sh
+      - . ../aws-profile-setup.sh
       - sls package --package sls-bucket-sample --stage develop --param="cfnRoleArn=$CF_EXECUTION_ROLE"
       - ls sls-bucket-sample
       - echo "deploying...."
