@@ -8,4 +8,7 @@ Resources:
       AccessControl: Private
       BucketName: serverless-private-bucket-cross-account
       PublicAccessBlockConfiguration: 
+        BlockPublicAcls: true
         BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
