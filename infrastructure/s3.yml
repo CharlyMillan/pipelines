@@ -6,4 +6,4 @@ Resources:
     DeletionPolicy: Delete
     Properties: 
       AccessControl: Private
-      BucketName: ServerlessPrivateBucketCrossAccount
+      BucketName: serverless-private-bucket-cross-account
