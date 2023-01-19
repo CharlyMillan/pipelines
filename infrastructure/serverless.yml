@@ -1,0 +1,18 @@
+service: cross-account-sample-1
+
+plugins:
+  - serverless-deployment-bucket
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'baseline'}
+  region: ${opt:region, 'us-east-1'}
+  deploymentBucket:
+    name: cross-account-sample-1-${self:provider.stage}
+
+custom:
+  deploymentBucket:
+    blockPublicAccess: true
+
+resources:
+  - ${file(s3.yml)}
