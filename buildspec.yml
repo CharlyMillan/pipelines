@@ -11,8 +11,6 @@ phases:
       - serverless plugin install -n serverless-deployment-bucket
   build:
     commands:
-      - pwd
       - echo "package servicex"
-      - cd infrastructure
       - sls package --package sls-bucket-sample --stage develop
       - ls sls-bucket-sample
