@@ -19,4 +19,4 @@ phases:
       - sls package --package sls-bucket-sample --stage develop --param="cfnRoleArn=$CF_EXECUTION_ROLE"
       - ls sls-bucket-sample
       - echo "deploying...."
-      - sls deploy --package sls-bucket-sample --stage develop --param="cfnRoleArn=$CF_EXECUTION_ROLE"
+      - sls deploy --package sls-bucket-sample --stage develop --param="cfnRoleArn=$CF_EXECUTION_ROLE" --verbose
