@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: 2010-09-09
+AWSTemplateFormatVersion: "2010-09-09"
 Description: Bucket created by deployer cross-account role.
 Resources:
   MySampleBucket:
