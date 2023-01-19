@@ -14,3 +14,5 @@ phases:
       - echo "package servicex"
       - sls package --package sls-bucket-sample --stage develop
       - ls sls-bucket-sample
+      - echo "deploying...."
+      - sls deploy --package sls-bucket-sample --stage develop 
