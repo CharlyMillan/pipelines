@@ -7,6 +7,7 @@ phases:
     commands:
       - echo "Install Prequisites"
       - npm install --location=global serverless@3.24.1
+      - serverless plugin install -n serverless-deployment-bucket
   build:
     commands:
       - echo "package servicex"
