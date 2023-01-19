@@ -6,9 +6,10 @@ phases:
       nodejs: 16.x
     commands:
       - echo "Install Prequisites"
-      - node --version
-      - npm install -g serverless@3.24.1
+      - npm install --location=global serverless@3.24.1
   build:
     commands:
       - echo "package servicex"
-      - sls -version
+      - cd infrastructure
+      - sls package --package sls-bucket-sample --stage develop
+      - ls sls-bucket-sample
