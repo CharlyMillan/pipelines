@@ -4,6 +4,10 @@ phases:
   install:
     commands:
       - echo "Install Prequisites"
+      - npm install
+      - npm install -g serverless@3.7.4
   build:
     commands:
-      - echo "Generate serverless package"
+      - echo "package servicex"
+      - . ./aws-profile-setup.sh
+      - sls -version
