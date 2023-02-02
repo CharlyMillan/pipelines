@@ -1,16 +1,13 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions ${{ github.repository_id }} 🚀
 on:
-  pull_request:
-    types: [opened, reopened]
-    branches: [actions]
+  push:
+    branches: [action]
 
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest
     steps:
       - run: echo "begin sonar ${{ github.event_name }} event."
-      - name: List files in the repository - buil
-        run: |
-          ls ${{ github.workspace }}
+      - run: echo "dotnet build"
       - run: echo "ending sonar ${{ job.status }}."
