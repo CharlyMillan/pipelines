@@ -1,5 +1,5 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions ${{ github.repository_id }} 🚀
+name: GitHub Actions SonarCloud
+run-name: ${{ github.actor }} is testing out GitHub Actions ${{ github.repositoryUrl }} 🚀
 on:
   pull_request:
     types: [opened, synchronize, reopened]
@@ -13,3 +13,15 @@ jobs:
       - name: List files in the repository - build
         run: |
           ls ${{ github.workspace }}
+      - name: Install SonarCloud scanner
+        run: |
+          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        shell: powershell
+        run: |
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"coinbtr_caas-nakamoto" /o:"coinbtr" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          <insert_your_clean_build_command>
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
